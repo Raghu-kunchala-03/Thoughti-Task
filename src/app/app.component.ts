@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from './services/task.service';
 import * as data from './services/sampleTask.json';
 import { ToastrService } from 'ngx-toastr';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ export class AppComponent {
   constructor(
     private formBuilder: FormBuilder,
     private taskService: TaskService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private notifierService: NotifierService
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +35,6 @@ export class AppComponent {
       User: [, Validators.required],
       Important: [false]
     })
-    console.log(this.TaskData,"TaskData")
   }
 
   /**
@@ -75,7 +76,7 @@ export class AppComponent {
     this.TaskData.Tasks.forEach(element => {
       console.log(element,"Item")
       if(element.Important=== true){
-        this.toastr.success(element.Task)
+      this.toastr.success(element.Task)
       }
     })
   }
